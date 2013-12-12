@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+require('default-debug')('brick:*');
+
+
+var opt     = require('optimist'),
+    options = require('../lib/options'),
+    cli     = require('../lib/cli');
+
+var argv = opt
+      .options('port', { alias: 'p' })
+      .options('host', { alias: 'h' })
+      .options('out', { alias: 'o' })
+      .options('version', { alias: 'v' })
+      .options('help', { alias: 'h' })
+      .argv;
+
+if (argv.help) require('show-help');
+if (argv.version) require('show-version');
+
+if (argv.port) options.port(argv.port);
+if (argv.out) options.out(argv.out);
+
+cli(argv);
