@@ -5,8 +5,12 @@
 
     OPTIONS
 
-        -o    --out         Specify a file to output HTML or JavaScript bundle of the brick.
+        -o    --out         Specify a directory or JavaScript file to build the brick into.
+        -a    --assets      Set the root URL to look for assets.
+        -T    --no-tmpl     Don't embed HTML templates into the JavaScript bundle.
+
         -p    --port        Change the default port that bricks serves on.
         -h    --hostname    Change the default port that bricks serves on.
+
         -v    --version     Show version and exit
         -h    --help        Show help and exit

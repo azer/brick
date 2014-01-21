@@ -1,0 +1,28 @@
+body {
+  padding: 50px;
+  background: #f2f2f2;
+}
+
+.apple, .carrot, .orange {
+  padding: 10px;
+  border: 10px solid #fff;
+}
+
+.apple {
+  background: green;
+}
+
+.carrot {
+  background: red;
+}
+
+.orange {
+  background: orange;
+}
+
+.cats {
+  border: 10px solid #fff;
+  background: #fff;
+  padding-right: 100px;
+  background: url(images/cat2.jpg) no-repeat 150px 0;
+}

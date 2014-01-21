@@ -2,7 +2,6 @@
 
 require('default-debug')('brick:*');
 
-
 var opt     = require('optimist'),
     options = require('../lib/options'),
     cli     = require('../lib/cli');

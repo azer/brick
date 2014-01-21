@@ -3,14 +3,12 @@
   "version": "0.0.0",
   "description": "UI Components for browsers and NodeJS",
   "main": "index.js",
-  "scripts": {
-    "test": "fox"
-  },
   "bin": {
     "brick": "./bin/brick"
   },
   "devDependencies": {
-    "prova": "*"
+    "prova": "*",
+    "request": "*"
   },
   "keywords": [
     "component",
@@ -36,8 +34,18 @@
     "new-format": "0.0.1",
     "is-node": "0.0.0",
     "dom-children": "0.0.2",
-    "one": "~3.1.4",
     "variable-name": "0.0.1",
-    "new-element": "0.0.1"
+    "new-element": "0.0.1",
+    "new-struct": "~0.1.0",
+    "categorize-files": "0.0.1",
+    "iter": "0.0.5",
+    "slug-to-title": "0.0.0",
+    "mkdirp": "~0.3.5",
+    "cpr": "~0.1.1",
+    "read-json": "0.0.0",
+    "browserify": "~3.20.0",
+    "pubsub": "~1.0.1",
+    "filename-id": "0.0.0",
+    "flat-glob": "0.0.1"
   }
 }
