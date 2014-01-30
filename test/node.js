@@ -30,26 +30,23 @@ describe('a simple brick: ./fixtures/hello-world', function(){
     expect(brick.defaultTemplateName).to.equal('index');
   });
 
-  it('loads templates and publishes from onReady', function(done){
-    expect(brick.templates.index).to.not.exist
-
-    brick.onError(done);
-
-    brick.onReady(function () {
-      expect(brick.templates.index).to.equal(fs.readFileSync('./test/fixtures/hello-world/index.html').toString());
-      expect(Object.keys(brick.templates)).to.deep.equal(['index']);
-      done();
-    });
+  it('has the assets sources under source property', function(){
+    expect(brick.source.css['style.css']).to.equal(expectedCSS);
+    expect(brick.source.html['index.html']).to.equal(fs.readFileSync('./test/fixtures/hello-world/index.html').toString());
   });
 
-  it('publishes from onError when an error occurs', function(done){
+  it('keeps HTML sources under templates property, with IDs', function(){
+    expect(brick.source.css['style.css']).to.equal(expectedCSS);
+  });
+
+  /*it('publishes from onError when an error occurs', function(done){
     var failing = require('./fixtures/failing').New();
 
     failing.onError(function (error) {
       expect(error).to.exist;
       done();
     });
-  });
+  });*/
 
   it('has a method to get browserify bundle', function(done){
     brick.js(function (error, js) {
@@ -62,7 +59,7 @@ describe('a simple brick: ./fixtures/hello-world', function(){
     brick.css(function (error, css) {
       if (error) return done(error);
 
-      expect(css).to.equal(expectedCSS);
+      expect(css).to.contain(expectedCSS);
       done();
     });
   });
@@ -100,7 +97,7 @@ describe('a simple brick: ./fixtures/hello-world', function(){
 
         expect(fs.readFileSync('./test/fixtures/hello-world/build/index.html').toString()).to.contain('<title>Hello World</title>');
         expect(fs.readFileSync('./test/fixtures/hello-world/build/index.html').toString()).to.contain('<h1>Hello world!</h1>');
-        expect(fs.readFileSync('./test/fixtures/hello-world/build/assets/bundle.css').toString()).to.equal(expectedCSS);
+        expect(fs.readFileSync('./test/fixtures/hello-world/build/assets/bundle.css').toString()).to.contain(expectedCSS);
         expect(fs.readFileSync('./test/fixtures/hello-world/build/assets/bundle.js').toString()).to.equal(expectedJS);
         expect(files).to.deep.equal(['assets', 'index.html']);
         expect(assetFiles).to.deep.equal(['bundle.css', 'bundle.js', 'images']);
@@ -123,6 +120,10 @@ describe('a brick with multiple templates: fruits', function () {
     brick = Fruits.New();
   });
 
+  it('sets the defaultTemplate as given', function(){
+    expect(brick.defaultTemplateName).to.equal('templates/default');
+  });
+
   it('renders the specified template by default', function (done) {
     var server = brick.serve(9001);
 
@@ -137,6 +138,8 @@ describe('a brick with multiple templates: fruits', function () {
 
       request('http://localhost:9001/assets/bundle.css', function (error, response, body) {
         if (error) return done(error);
+
+        expect(body).to.contain(expectedCSS);
 
         server.close();
         done();
@@ -164,7 +167,7 @@ describe('a brick with multiple templates: fruits', function () {
         expect(body).to.contain('<h1>green apple template</h1>');
         expect(body).to.contain('<h1>orange template</h1>');
         expect(body).to.contain('<h1>red carrot template</h1>');
-        expect(fs.readFileSync('./test/fixtures/fruits/build/assets/bundle.css').toString()).to.equal(expectedCSS);
+        expect(fs.readFileSync('./test/fixtures/fruits/build/assets/bundle.css').toString()).to.contain(expectedCSS);
         expect(js).to.equal(expectedJS);
         expect(js).to.contain('<h1>green apple template</h1>');
         expect(js).to.contain('<h1>orange template</h1>');
@@ -192,6 +195,10 @@ describe('a brick can embed other bricks: article', function(){
     expect(brick.name).to.equal('Article');
     expect(brick.embed.title.name).to.equal('Title');
     expect(brick.embed.content.name).to.equal('Content');
+  });
+
+  it('serves', function(done){
+    brick.serve(9001);
   });
 
 });

@@ -16,6 +16,9 @@
     "ui",
     "assets"
   ],
+  "scripts": {
+    "test": "prova test/node.js -V"
+  },
   "repository": {
     "url": "git@github.com:azer/brick.git",
     "type": "git"
@@ -46,6 +49,8 @@
     "browserify": "~3.20.0",
     "pubsub": "~1.0.1",
     "filename-id": "0.0.0",
-    "flat-glob": "0.0.1"
+    "flat-glob": "0.0.1",
+    "lsr": "~1.0.0",
+    "ignore-doc": "0.0.0"
   }
 }
