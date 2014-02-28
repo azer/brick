@@ -2,3 +2,5 @@ node_modules
 !test/fixtures/article/node_modules
 npm-debug.log
 **/*/build
+test/fixtures/fruits/build/
+test/fixtures/hello-world/build/

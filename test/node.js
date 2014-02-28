@@ -6,7 +6,6 @@ var it = prova.it;
 var beforeEach = prova.beforeEach;
 var expect = prova.expect;
 
-
 describe('a simple brick: ./fixtures/hello-world', function(){
   var brick;
 
@@ -39,14 +38,14 @@ describe('a simple brick: ./fixtures/hello-world', function(){
     expect(brick.source.css['style.css']).to.equal(expectedCSS);
   });
 
-  /*it('publishes from onError when an error occurs', function(done){
-    var failing = require('./fixtures/failing').New();
+  //it('publishes from onError when an error occurs', function(done){
+  //  var failing = require('./fixtures/failing').New();
 
-    failing.onError(function (error) {
-      expect(error).to.exist;
-      done();
-    });
-  });*/
+  //  failing.onError(function (error) {
+  //    expect(error).to.exist;
+  //    done();
+  //  });
+  //});
 
   it('has a method to get browserify bundle', function(done){
     brick.js(function (error, js) {
@@ -199,6 +198,10 @@ describe('a brick can embed other bricks: article', function(){
 
   it('serves', function(done){
     brick.serve(9001);
+    console.log('serving now');
+    done();
   });
 
 });
+
+if (!require.mock) prova.run();

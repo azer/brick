@@ -1,4 +1,7 @@
 prova = bin 'prova'
 
-task 'test', ->
-    prova 'test/node.js -V'
+all 'test'
+
+task 'test', 'lib/**/*.js', 'test/**/*.js', 'test/**/*.css', ->
+    debug 'Running tests'
+    prova 'test/node.js -V -g article'

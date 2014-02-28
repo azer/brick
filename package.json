@@ -26,13 +26,9 @@
   "author": "Azer Koçulu <azer@kodfabrik.com>",
   "license": "BSD",
   "dependencies": {
-    "show-help": "0.0.0",
-    "show-version": "0.0.0",
     "local-debug": "0.0.0",
     "default-debug": "0.0.0",
-    "attrs": "0.0.0",
     "methodify": "0.0.x",
-    "optimist": "~0.6.0",
     "mime-of": "0.1.0",
     "new-format": "0.0.1",
     "is-node": "0.0.0",
@@ -51,6 +47,9 @@
     "filename-id": "0.0.0",
     "flat-glob": "0.0.1",
     "lsr": "~1.0.0",
-    "ignore-doc": "0.0.0"
+    "ignore-doc": "0.0.0",
+    "concat-stream": "~1.4.1",
+    "new-command": "0.0.1",
+    "propertify": "0.0.0"
   }
 }

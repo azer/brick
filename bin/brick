@@ -1,23 +1,16 @@
 #!/usr/bin/env node
 
+var command = require('new-command')({
+  p: 'port',
+  n: 'hostname',
+  o: 'out'
+});
+
 require('default-debug')('brick:*');
 
-var opt     = require('optimist'),
-    options = require('../lib/options'),
-    cli     = require('../lib/cli');
+var options = require('../lib/node/options');
 
-var argv = opt
-      .options('port', { alias: 'p' })
-      .options('host', { alias: 'h' })
-      .options('out', { alias: 'o' })
-      .options('version', { alias: 'v' })
-      .options('help', { alias: 'h' })
-      .argv;
+if (command.port) options.port(command.port);
+if (command.out) options.out(command.out);
 
-if (argv.help) require('show-help');
-if (argv.version) require('show-version');
-
-if (argv.port) options.port(argv.port);
-if (argv.out) options.out(argv.out);
-
-cli(argv);
+require('../lib/node/cli')(command);
