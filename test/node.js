@@ -72,7 +72,7 @@ describe('a simple brick: ./fixtures/hello-world', function(){
       expect(body).to.contain('<title>Hello World</title>');
       expect(body).to.contain('<h1>Hello world!</h1>');
 
-      request('http://localhost:9001/assets/bundle.css', function (error, response, body) {
+      request('http://localhost:9001/assets/hello-world/bundle.css', function (error, response, body) {
         if (error) return done(error);
 
         expect(body).to.contain(expectedCSS);
@@ -135,7 +135,7 @@ describe('a brick with multiple templates: fruits', function () {
       expect(body).to.contain('<h1>orange template</h1>');
       expect(body).to.contain('<h1>red carrot template</h1>');
 
-      request('http://localhost:9001/assets/bundle.css', function (error, response, body) {
+      request('http://localhost:9001/assets/fruits/bundle.css', function (error, response, body) {
         if (error) return done(error);
 
         expect(body).to.contain(expectedCSS);
@@ -181,9 +181,7 @@ describe('a brick with multiple templates: fruits', function () {
 });
 
 describe('a brick can embed other bricks: article', function(){
-
   var brick;
-
   var Article = require('./fixtures/article');
 
   beforeEach(function(){
@@ -196,10 +194,30 @@ describe('a brick can embed other bricks: article', function(){
     expect(brick.embed.content.name).to.equal('Content');
   });
 
-  it('serves', function(done){
-    brick.serve(9001);
-    console.log('serving now');
-    done();
+  it('serves the main brick including the embedded ones', function(done){
+    var server = brick.serve(9001);
+
+    request('http://localhost:9001', function (error, response, body) {
+      if (error) return done(error);
+      expect(body).to.contain('<h1>On the Genealogy of Morals</h1>');
+      expect(body).to.contain('At this point');
+      expect(body).to.contain('as it were, subterranean gratifications');
+
+      expect(body).to.contain('<div class="paintings">');
+
+      request('http://localhost:9001/assets/article/bundle.css', function (error, response, body) {
+        if (error) return done(error);
+        expect(body).to.contain('url(/assets/paintings/tortoise.jpg)');
+        expect(body).to.contain('/assets/content/gentium.woff');
+
+        request('http://localhost:9001/assets/paintings/tortoise.jpg', function (error, response, body) {
+          if (error) return done(error);
+          server.close();
+          done();
+        });
+
+      });
+    });
   });
 
 });

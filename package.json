@@ -50,6 +50,7 @@
     "ignore-doc": "0.0.0",
     "concat-stream": "~1.4.1",
     "new-command": "0.0.1",
-    "propertify": "0.0.0"
+    "propertify": "0.0.0",
+    "utf8-length": "0.0.1"
   }
 }
