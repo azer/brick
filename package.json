@@ -1,0 +1,51 @@
+{
+  "name": "brick",
+  "version": "0.0.5",
+  "description": "Component system for NodeJS and Browsers",
+  "main": "index.js",
+  "bin": {
+    "brick": "./bin/brick"
+  },
+  "dependencies": {
+    "new-struct": "~0.1.0",
+    "brick-browser": "0.0.x",
+    "brick-node": "0.0.x",
+    "new-command": "^1.0.2",
+    "default-debug": "0.0.0",
+    "local-debug": "0.0.0",
+    "read-json": "0.0.0",
+    "style-format": "0.0.0",
+    "format-text": "0.0.3"
+  },
+  "devDependencies": {
+    "prova": "*",
+    "request": "*",
+    "glob": "3.x",
+    "rm-rf": "0.0.2",
+    "flickr-favorites": "0.0.x",
+    "attr": "^1.0.1",
+    "flickr-photo-info": "0.0.0",
+    "pubsub": "^1.0.2",
+    "concat-stream": "^1.4.6",
+    "bud": "^1.0.4",
+    "parallelly": "0.0.0"
+  },
+  "browser": {
+    "brick-node": "brick-browser"
+  },
+  "keywords": [
+    "component",
+    "brick",
+    "ui",
+    "assets"
+  ],
+  "scripts": {
+    "test": "node do test"
+  },
+  "repository": {
+    "url": "git@github.com:azer/brick.git",
+    "type": "git"
+  },
+  "author": "Azer Koçulu <azer@kodfabrik.com>",
+  "license": "BSD"
+}
