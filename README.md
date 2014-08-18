@@ -10,4 +10,4 @@ $ npm install brick
 
 ## Intro
 
-Check out tests for examples.
+Check out [tests](https://github.com/bricks/brick/tree/master/test/fixtures) for examples.
