@@ -1,9 +1,18 @@
 var lib = require("brick-node");
 var struct = require("new-struct");
 
-module.exports = create;
+module.exports = define;
 
-function create (methods) {
+function define () {
+  var mixing, methods;
+
+  if (arguments.length < 2) {
+    methods = arguments[0];
+  } else {
+    mixing = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
+    methods = arguments[arguments.length - 1];
+  }
+
   if (typeof methods == 'function') {
     methods = {
       show: methods
@@ -12,13 +21,20 @@ function create (methods) {
 
   methods || (methods = {});
 
-  var customNew = methods.New;
+  var FactoryFn = methods.New;
   methods.New = New;
 
-  var Embedding = struct(methods);
+  var Embedding;
+
+  if (mixing && mixing.length) {
+    Embedding = struct.apply(undefined, mixing.concat(methods));
+  } else {
+    Embedding = struct(methods);
+  }
+
   Embedding.embedsBrick = true;
 
-  var Brick = lib.create(Embedding);
+  var Brick = lib.create(Embedding, mixing);
   Embedding.entry = Brick.entry;
 
   return Embedding;
@@ -28,8 +44,8 @@ function create (methods) {
 
     var parent;
 
-    if (customNew) {
-      parent = customNew(attrs);
+    if (FactoryFn) {
+      parent = FactoryFn(attrs);
     } else {
       parent = Embedding(attrs);
     }
@@ -38,6 +54,7 @@ function create (methods) {
 
     var brickAttrs = attrs.brick || {};
     attrs.parent && (brickAttrs.parent = attrs.parent.brick);
+    mixing && (brickAttrs.mixing = mixing);
 
     var brick = Brick.New(brickAttrs);
     parent.brick = brick;

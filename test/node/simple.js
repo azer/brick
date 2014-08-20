@@ -33,7 +33,7 @@ test('the assets sources under source property (html)', function (t) {
 test('the assets sources under source property (css)', function (t) {
   t.plan(1);
   hw.brick.source.css['style.css']().pipe(concat(function (css) {
-    t.equal(css.toString(), expectedCSS);
+    t.equal(css.toString(), expectedCSS + "\n");
   }));
 });
 
