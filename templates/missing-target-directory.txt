@@ -1,3 +1,0 @@
-
-    {bold}{red}Error{reset}
-    {bold}Target directory needed to build. Example: 'brick build dist/'{reset}
