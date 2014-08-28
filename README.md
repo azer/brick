@@ -5,6 +5,7 @@ UI Component system designed for NodeJS and front-end.
 Features:
 
 * Supports embedding and mixing components
+* Allows creating components with no JS.
 * Static output with compiled assets
 * Recovers DOM state on client-side
 * Supports generating stand-alone distributions
