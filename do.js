@@ -15,6 +15,7 @@ task('test node', once('clean'), function (t) {
     .then('node test/node/async-bindings -q')
     .then('node test/node/async-nested-bindings -q')
     .then('node test/node/clock -q')
+    .then('node test/node/mixing -q')
     .then(t.done);
 });
 
@@ -26,6 +27,7 @@ task('test frontend', once('clean', 'fixtures'), function (t) {
     .then('node test/dom/async-bindings -f test/fixtures/async-photos/build/index.html -b -l phantom -q')
     .then('node test/dom/async-nested-bindings -f test/fixtures/async-nested-photos/build/index.html -b -l phantom -q')
     .then('node test/dom/clock -f test/fixtures/clock/build/index.html -b -l phantom -q')
+    .then('node test/dom/mixing -f test/fixtures/mixing/build/index.html -b -l phantom -q')
     .then(t.done);
 });
 
@@ -69,6 +71,12 @@ task('test clock in dom', once('fixtures/clock'), function (t) {
  .then(t.done);
 });
 
+task('test mixing in dom', once('fixtures/mixing'), function (t) {
+  t.exec('node test/dom/mixing -f test/fixtures/mixing/build/index.html -b')
+    .then('curl localhost:7559/restart -s')
+ .then(t.done);
+});
+
 task('clean', function (t) {
   parallelly()
     .then(rmrf, ['test/fixtures/hello-world/build'])
@@ -78,10 +86,11 @@ task('clean', function (t) {
     .then(rmrf, ['test/fixtures/async-photos/build'])
     .then(rmrf, ['test/fixtures/async-nested-photos/build'])
     .then(rmrf, ['test/fixtures/clock/build'])
+    .then(rmrf, ['test/fixtures/mixing/build'])
     .done(t.done);
 });
 
-build('fixtures', once('fixtures/hello-world', 'fixtures/fruits', 'fixtures/article', 'fixtures/photos', 'fixtures/async-photos', 'fixtures/async-nested-photos', 'fixtures/clock'));
+build('fixtures', once('fixtures/hello-world', 'fixtures/fruits', 'fixtures/article', 'fixtures/photos', 'fixtures/async-photos', 'fixtures/async-nested-photos', 'fixtures/clock', 'fixtures/mixing'));
 
 build('fixtures/hello-world', watch('lib', 'node_modules', 'test/fixtures/hello-world/*.{js,css,json,html}').ignore('test/fixtures/hello-world/build/**/*'), function (b) {
   b.exec('brick build test/fixtures/hello-world test/fixtures/hello-world/build -s')
@@ -126,8 +135,16 @@ build('fixtures/async-nested-photos', watch('lib', 'test/fixtures/async-nested-p
 });
 
 build('fixtures/clock', watch('lib', 'test/fixtures/clock/*.*').ignore('test/fixtures/clock/build/**/*'), function (b) {
-  rmrf('test/fixtures/async-nested-photos/build', function () {
+  rmrf('test/fixtures/clock/build', function () {
     b.exec('brick build test/fixtures/clock test/fixtures/clock/build -s')
+      .then('curl localhost:7559/restart -s')
+      .then(b.done);
+  });
+});
+
+build('fixtures/mixing', watch('lib', 'test/fixtures/mixing/*.*').ignore('test/fixtures/mixing/build/**/*'), function (b) {
+  rmrf('test/fixtures/mixing/build', function () {
+    b.exec('brick build test/fixtures/mixing test/fixtures/mixing/build -s')
       .then('curl localhost:7559/restart -s')
       .then(b.done);
   });

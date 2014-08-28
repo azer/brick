@@ -3,15 +3,14 @@ var Cover = require("cover-background");
 var Centered = require("centered");
 
 module.exports = Brick(Cover, Centered, {
-  show: show,
-  loop: loop
+  show: show
 });
 
-function loop (yo, next) {
-  setTimeout(next, 1000);
-}
-
 function show (yo) {
-  yo.brick.defaultTemplateName = 'cover';
-  yo.brick.bind('.cover-content', 'YO');
+  Cover.methods.show(yo, 'https://farm4.staticflickr.com/3918/14722880989_35326344ae_b.jpg');
+
+  yo.brick.bind('.cover-content', 'yo');
+  yo.brick.bind('.cover-container', {
+    'class': 'cover-container centered'
+  });
 }
