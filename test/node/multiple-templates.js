@@ -8,7 +8,7 @@ var expectedCSS = fs.readFileSync('./test/fixtures/fruits/style.css').toString()
 
 test('the defaultTemplate as given', function (t) {
   t.plan(1);
-  t.equal(fruits.brick.defaultTemplateName, 'index');
+  t.equal(fruits.brick.defaultTemplate(), 'index');
 });
 
 /*test('serves the default template on index page', function (t) {

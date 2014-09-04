@@ -53,8 +53,11 @@ function define () {
     parent.embedsBrick = true;
 
     var brickAttrs = attrs.brick || {};
+
     attrs.parent && (brickAttrs.parent = attrs.parent.brick);
     mixing && (brickAttrs.mixing = mixing);
+
+    brickAttrs.wrapper = parent;
 
     var brick = Brick.New(brickAttrs);
     parent.brick = brick;

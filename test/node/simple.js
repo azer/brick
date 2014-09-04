@@ -20,7 +20,7 @@ test('name, entry, dir and manifest properties', function (t) {
 
 test('the default template as first html filename', function (t) {
   t.plan(1);
-  t.equal(hw.brick.defaultTemplateName, 'index');
+  t.equal(hw.brick.defaultTemplate(), 'index');
 });
 
 test('the assets sources under source property (html)', function (t) {
