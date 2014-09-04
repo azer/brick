@@ -1,6 +1,6 @@
 {
   "name": "brick",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Component system for NodeJS and Browsers",
   "main": "index.js",
   "bin": {
