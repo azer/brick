@@ -22,6 +22,5 @@ test('building', function (t) {
     });
 
     t.end();
-
   });
 });

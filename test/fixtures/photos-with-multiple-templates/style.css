@@ -1,0 +1,23 @@
+.title {
+  text-align: center;
+  font: 24px Georgia, Times;
+  color: #333;
+}
+
+.photos {
+  list-style: none;
+  padding: 0 50px 50px 50px;
+  margin: 0;
+}
+
+.photo {
+  width: 50%;
+  height: 250px;
+  background: center no-repeat;
+  float: left;
+}
+
+.panoramic {
+  width: 100%;
+  float: none;
+}
