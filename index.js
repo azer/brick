@@ -4,13 +4,12 @@ var struct = require("new-struct");
 module.exports = define;
 
 function define () {
-  var mixing, methods;
+  var mixing, methods, sliceIndex;
 
-  if (arguments.length < 2) {
-    methods = arguments[0];
-  } else {
-    mixing = Array.prototype.slice.call(arguments, 0, arguments.length - 1);
-    methods = arguments[arguments.length - 1];
+  if (arguments.length) {
+    sliceIndex = arguments[arguments.length - 1].embedsBrick ? 0 : 1;
+    mixing = Array.prototype.slice.call(arguments, 0, arguments.length - sliceIndex);
+    methods = arguments[arguments.length - sliceIndex];
   }
 
   if (typeof methods == 'function') {
