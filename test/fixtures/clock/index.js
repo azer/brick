@@ -5,7 +5,7 @@ var randomColor = require("random-color");
 module.exports = Brick({
   update: update,
   show: show,
-  loop: loop
+  ready: ready
 });
 
 function update (clock, done) {
@@ -17,8 +17,8 @@ function update (clock, done) {
   done();
 }
 
-function loop (clock, next) {
-  setTimeout(next, 1000);
+function ready (clock) {
+  setInterval(clock.brick.refresh, 1000);
 }
 
 function show (clock) {

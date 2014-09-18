@@ -135,7 +135,7 @@ build('fixtures/async-photos', watch('lib', 'test/fixtures/async-photos/*.*').ig
   });
 });
 
-build('fixtures/async-nested-photos', watch('lib', 'test/fixtures/async-nested-photos/*.*').ignore('test/fixtures/async-nested-photos/build/**/*'), function (b) {
+build('fixtures/async-nested-photos', watch('lib', 'node_modules', 'test/fixtures/async-nested-photos/*.*').ignore('test/fixtures/async-nested-photos/build/**/*'), function (b) {
   rmrf('test/fixtures/async-nested-photos/build', function () {
     b.exec('brick build test/fixtures/async-nested-photos test/fixtures/async-nested-photos/build -s')
       .then('curl localhost:7559/restart -s')
